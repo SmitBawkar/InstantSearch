@@ -21,7 +21,7 @@ app.get('/search',function(req,res)
     if(searchQuery !== '' && searchQuery !== undefined && searchQuery.length >= 3)
     {
         //search and send response
-         res.json(SearchApi.findAcrossTries(searchQuery));  
+         res.json(SearchApi.findAcrossTries(searchQuery.trim()));  
     }
     else
     {
