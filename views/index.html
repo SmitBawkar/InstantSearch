@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Instant Search</title>
+  <script src="public/jquery/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" href="public/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="public/css/index.css">
+  <script src="public/bootstrap/bootstrap.min.js"></script>
+  <script src="public/scripts/index.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Instant Search</h3>
+      </div>
+      <div id="panel_body_container" class="panel-body">
+        <div class="input-group">
+          <input id="txt_search" type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button id="btn_search" class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+          </span>
+        </div>
+        <br>
+        <div id="div_search_result">
+          <table id="tbl_Search_result" class="table table-hover table-sm">
+            <div id='div_error' style="display:none" class="alert alert-danger">
+              <span></span>
+            </div>
+            <thead style="display:none">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Rank</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel-body">
+
+        <div>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
