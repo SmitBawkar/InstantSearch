@@ -20,7 +20,7 @@ function TrieNode(key) {
     this.end = false;
 
     //masterHashTabkeKey is the key coressponding to fullname
-    this.masterHashTableKey = null;
+    this.masterHashTableKey = [];
   }
   
   // iterates through the parents to get the word.
@@ -68,7 +68,7 @@ function TrieNode(key) {
       if (i == word.length-1) {
         // if it is, we set the end flag to true and store the masterHashTableKey reference
         node.end = true;
-        node.masterHashTableKey = masterHashTableKey;
+        node.masterHashTableKey.push(masterHashTableKey);
       }
     }
   };

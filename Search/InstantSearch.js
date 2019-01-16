@@ -42,16 +42,60 @@ function SearchApi()
 
     this.findAcrossTries = function (query)
     {
-        let fnameResut = fnameTrie.find(query.toLowerCase());
-        let mnameResut = mnameTrie.find(query.toLowerCase());
-        let lnameResut = lnameTrie.find(query.toLowerCase());
-        
-        //Map full name from masterHashTable
-        fnameResut.forEach(function(item){item.fullname = masterHashTable[item.masterHashTableKey].split(',').join(' ') });
-        lnameResut.forEach(function(item){item.fullname = masterHashTable[item.masterHashTableKey].split(',').join(' ')});
-        mnameResut.forEach(function(item){item.fullname = masterHashTable[item.masterHashTableKey].split(',').join(' ')});
+        let fnameResut =[];
+        let mnameResut = [];
+        let lnameResut = [];
 
-        return computeRank(fnameResut,mnameResut,lnameResut);
+        let fnames = fnameTrie.find(query.toLowerCase());
+        let mnames = mnameTrie.find(query.toLowerCase());
+        let lnames = lnameTrie.find(query.toLowerCase());
+        
+        //Add fullnames for which First name starts with Querry string        
+        if(fnames.length > 0)
+        {            
+            fnames.forEach(function(item){
+                if(item.masterHashTableKey !== undefined && item.masterHashTableKey.length > 0)
+                {
+                    item.masterHashTableKey.forEach(function(el){                        
+                        fnameResut.push({
+                            fullname: masterHashTable[el].split(',').join(' ')
+                        });
+                    });
+                }
+            });
+         }
+
+        //Add fullnames for which Middle name starts with Querry string
+        if(mnames.length > 0)
+        {            
+            mnames.forEach(function(item){
+                if(item.masterHashTableKey !== undefined && item.masterHashTableKey.length > 0)
+                {
+                    item.masterHashTableKey.forEach(function(el){                        
+                        mnameResut.push({
+                            fullname: masterHashTable[el].split(',').join(' ')
+                        });
+                    });
+                }
+            });
+         }
+         
+          //Add fullnames for which Last name starts with Querry string
+        if(lnames.length > 0)
+        {            
+            lnames.forEach(function(item){
+                if(item.masterHashTableKey !== undefined && item.masterHashTableKey.length > 0)
+                {
+                    item.masterHashTableKey.forEach(function(el){                        
+                        lnameResut.push({
+                            fullname: masterHashTable[el].split(',').join(' ')
+                        });
+                    });
+                }
+            });
+         }
+         
+      return computeRank(fnameResut,mnameResut,lnameResut);
     }
 
 
@@ -97,10 +141,10 @@ function SearchApi()
     function prepareSearchData(csvData)  
     {
         loadMasterHashTable(csvData);
-        
         //insert firstName, MiddleName and LastName in 3 different tries    
         Object.entries(masterHashTable).forEach(function([key, val]){
             let name = val.split(',');
+
             fnameTrie.insert(name[0].toLowerCase(),key);
             mnameTrie.insert(name[1].toLowerCase(),key);
             lnameTrie.insert(name[2].toLowerCase(),key);
